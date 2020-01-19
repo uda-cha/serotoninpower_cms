@@ -1,0 +1,23 @@
+p#notice
+  = notice
+h1
+  | Comments
+- if @comments.exists?
+  table
+    thead
+      tr
+        th
+          | Name
+        th
+          | Content
+        th[colspan="3"]
+    tbody
+      - @comments.each do |comment|
+        tr
+          td
+            = comment.name
+          td
+            = comment.content
+- else
+  p
+    | コメントはありません。
