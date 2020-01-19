@@ -8,7 +8,7 @@ h2
       span#comment_head_name
         = comment.name
       span#comment_head_date
-        = comment.updated_at
+        = comment.updated_at.to_s(:published_on)
     div#comment_body
       = comment.content
 - else
