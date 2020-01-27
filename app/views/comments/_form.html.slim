@@ -8,18 +8,14 @@
         - comment.errors.full_messages.each do |message|
           li
             = message
-  table
-    tr
-      .field
-        td
-          = form.label :name
-        td
-          = form.text_field :name
-    tr
-      .field
-        td
-          = form.label :content
-        td
-          = form.text_area :content
-  .actions
-    = form.submit "投稿"
+  .input_wrapper
+    .label
+      = form.label :name
+    .cotent
+      = form.text_field :name
+    .label
+      = form.label :content
+    .cotent
+      = form.text_area :content, rows: 8
+    .actions
+      = form.submit "投稿"

@@ -1,16 +1,17 @@
-p#notice
-  = notice
 h2
   | コメント
 - if @comments.exists?
-  - @comments.each do |comment|
-    div#comment_head
-      span#comment_head_name
-        = comment.name
-      span#comment_head_date
-        = comment.updated_at.to_s(:published_on)
-    div#comment_body
-      = comment.content
+  - @comments.each.with_index(1) do |comment, idx|
+    div.comment
+      div.comment_head
+        span.comment_head_number
+          = "##{idx}"
+        span.comment_head_name
+          = h(comment.name)
+        span.comment_head_date
+          = comment.updated_at.to_s(:published_on)
+      div.comment_body
+        = simple_format(comment.content)
 - else
   p
     | コメントはありません。

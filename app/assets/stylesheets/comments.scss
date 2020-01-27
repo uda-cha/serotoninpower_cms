@@ -2,3 +2,80 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+body {
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h2 {
+  font-size: 1.65rem;
+  padding-bottom: .3rem;
+  border-bottom: 1px solid #eaecef;
+}
+
+.notice {
+  padding: .5rem;
+  color: #008000;
+  background: whitesmoke;
+  border-left: double 7px #008000;
+  border-right: double 7px #008000;
+}
+
+.comment {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.comment_head_number {
+  display: inline-block;
+  padding-right: 1rem;
+}
+
+.comment_head_name {
+  display: inline-block;
+  color: #008000;
+  padding-right: 1rem;
+}
+
+.comment_head_date {
+  display: inline-block;
+  font-size: 0.8rem;
+}
+
+.comment_body {
+  padding: 0 0.5rem;
+  word-break: break-all;
+}
+
+.input_wrapper .label {
+  padding-bottom: .7rem;
+}
+
+@mixin content_in_input_wrapper {
+  padding: 10px;
+  line-height: 1.5em;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  margin-bottom: 1.3rem;
+}
+
+.input_wrapper .cotent input {
+  @include content_in_input_wrapper;
+}
+
+.input_wrapper .cotent textarea {
+  @include content_in_input_wrapper;
+}
+
+.input_wrapper .actions input {
+  background-color: #c2d6ba;
+  border-color: #c2d6ba;
+  border-radius: 8px;
+  color: #333;
+  line-height: 1.5;
+  padding: 5px 10px;
+}
