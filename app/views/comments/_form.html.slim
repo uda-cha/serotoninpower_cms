@@ -2,8 +2,8 @@
   - if comment.errors.any?
     #error_explanation
       h3
-        = pluralize(comment.errors.count, "error")
-        |  prohibited this comment from being saved:
+        = comment.errors.count
+        |  つのエラーがあります
       ul
         - comment.errors.full_messages.each do |message|
           li

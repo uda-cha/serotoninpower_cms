@@ -1,0 +1,11 @@
+---
+ja:
+  activerecord:
+    models:
+      comment: コメント
+    attributes:
+      comment:
+        post_id: 投稿ID
+        name:    名前
+        public:  公開
+        content: コメント
