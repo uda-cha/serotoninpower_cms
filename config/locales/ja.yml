@@ -9,5 +9,7 @@ ja:
         name:    名前
         public:  公開
         content: コメント
+        ipadress: IPアドレス
+        admin: 管理者
   notice:
     was_created: が投稿されました
