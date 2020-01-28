@@ -50,15 +50,23 @@ h2 {
   margin-bottom: 1rem;
 }
 
-.comment_head_number {
+@mixin comment_head_span {
   display: inline-block;
   padding-right: 1rem;
 }
 
+.comment_head_number {
+  @include comment_head_span;
+}
+
 .comment_head_name {
-  display: inline-block;
+  @include comment_head_span;
   color: #008000;
-  padding-right: 1rem;
+}
+
+.comment_head_name_admin {
+  @include comment_head_span;
+  color: #ff4500;
 }
 
 .comment_head_date {

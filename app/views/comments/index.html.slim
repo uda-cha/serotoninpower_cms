@@ -6,7 +6,7 @@ h2
       div.comment_head
         span.comment_head_number
           = "##{idx}"
-        span.comment_head_name
+        span class=(comment.admin ? 'comment_head_name_admin' : 'comment_head_name')
           = h(comment.name)
         span.comment_head_date
           = comment.updated_at.to_s(:published_on)
