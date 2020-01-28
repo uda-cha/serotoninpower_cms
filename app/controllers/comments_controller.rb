@@ -27,6 +27,8 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.post_id = params[:post_id]
     @comment.public = true
+    @comment.ipadress = request.remote_ip
+    @comment.admin = false
 
     respond_to do |format|
       if @comment.save
