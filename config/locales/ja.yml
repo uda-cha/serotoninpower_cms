@@ -9,3 +9,5 @@ ja:
         name:    名前
         public:  公開
         content: コメント
+  notice:
+    was_created: が投稿されました

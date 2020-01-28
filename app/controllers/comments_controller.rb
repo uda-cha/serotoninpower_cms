@@ -30,7 +30,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to new_comment_path, notice: 'Comment was successfully created.' }
+        format.html { redirect_to new_comment_path, notice: I18n.t("activerecord.models.comment") + I18n.t("notice.was_created") }
         #format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new }
