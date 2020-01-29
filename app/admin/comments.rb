@@ -15,10 +15,12 @@ ActiveAdmin.register Comment do
   #   permitted
   # end
 
+  actions :all, except: [:destroy]
+
   form do |f|
     f.semantic_errors
     f.inputs do
-      f.input :post_id # 全カラム明示しないとなぜかこのカラムが表示されない
+      f.input :post_id # FIXME:全カラム明示しないとなぜかこのカラムが表示されない
       f.input :name
       f.input :public
       f.input :content
