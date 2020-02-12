@@ -5,5 +5,8 @@ Rails.application.routes.draw do
 
   scope '/posts/:post_id' do
     resources :comments, only: [:index, :new, :create]
+    namespace :comments do
+      get :wrapper
+    end
   end
 end

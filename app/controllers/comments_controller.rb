@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.where(post_id: params[:post_id], public: true)
+    get_comment_list
   end
 
   # GET /comments/1
@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
-    @comment = Comment.new
+    @newcomment = Comment.new
   end
 
   # GET /comments/1/edit
@@ -24,18 +24,19 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(comment_params)
-    @comment.post_id = params[:post_id]
-    @comment.public = true
-    @comment.ipadress = request.remote_ip
-    @comment.admin = false
+    @newcomment = Comment.new(comment_params)
+    @newcomment.post_id = params[:post_id]
+    @newcomment.public = true
+    @newcomment.ipadress = request.remote_ip
+    @newcomment.admin = false
 
     respond_to do |format|
-      if @comment.save
-        format.html { redirect_to new_comment_path, notice: I18n.t("activerecord.models.comment") + I18n.t("notice.was_created") }
+      if @newcomment.save
+        format.html { redirect_to comments_wrapper_path, notice: I18n.t("activerecord.models.comment") + I18n.t("notice.was_created") }
         #format.json { render :show, status: :created, location: @comment }
       else
-        format.html { render :new }
+        get_comment_list
+        format.html { render :wrapper }
         #format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -65,6 +66,11 @@ class CommentsController < ApplicationController
   #  end
   #end
 
+  def wrapper
+    index
+    new
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     #def set_comment
@@ -74,5 +80,9 @@ class CommentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
       params.require(:comment).permit(:name, :content)
+    end
+
+    def get_comment_list
+      @comments ||= Comment.where(post_id: params[:post_id], public: true)
     end
 end
