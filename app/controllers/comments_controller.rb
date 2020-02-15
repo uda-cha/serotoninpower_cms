@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   #before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  after_action :allow_iframe
 
   # GET /comments
   # GET /comments.json
@@ -84,5 +85,9 @@ class CommentsController < ApplicationController
 
     def get_comment_list
       @comments ||= Comment.where(post_id: params[:post_id], public: true)
+    end
+
+    def allow_iframe
+      response.headers['X-Frame-Options'] = Rails.configuration.x.mod_response_header.x_frame_options
     end
 end
