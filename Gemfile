@@ -26,6 +26,7 @@ gem 'sassc-rails', '>= 2.1.2'
 gem 'activeadmin', '>= 2.6.0'
 gem 'devise', '>= 4.7.0'
 gem 'rails_same_site_cookie', '>= 0.1.5'
+gem 'rack-attack', '>= 6.2.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
