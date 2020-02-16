@@ -66,5 +66,25 @@ iframe での表示を許可するオリジンを設定するため、環境変�
 * 例
 
 ```sh
-$ export allow_iframe_from=https://hoge.sample.com/
+$ export allow_iframe_from='https://hoge.sample.com/'
+```
+
+## デプロイ前にやること
+
+```sh
+$ RAILS_ENV=production docker-compose run --rm rails bundle exec rails assets:precompile
+```
+
+## デプロイ後にやること
+
+```sh
+$ bundle exec rails db:migrate
+```
+
+## デプロイ後に必要な設定
+
+管理画面へアクセスするアカウントを作成します。
+
+```sh
+$ bundle exec rake admin_user:create[yourmail@sample.com,yourpassword]
 ```
