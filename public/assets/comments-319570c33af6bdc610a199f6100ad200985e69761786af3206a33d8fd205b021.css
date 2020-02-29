@@ -2,18 +2,21 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+/* line 5, app/assets/stylesheets/comments.scss */
 body {
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
   -webkit-font-smoothing: antialiased;
   background-color: #fff;
 }
 
+/* line 11, app/assets/stylesheets/comments.scss */
 h2 {
   font-size: 1.65rem;
   padding-bottom: .3rem;
   border-bottom: 1px solid #eaecef;
 }
 
+/* line 17, app/assets/stylesheets/comments.scss */
 #notice {
   padding: .5rem;
   color: #008000;
@@ -22,6 +25,7 @@ h2 {
   border-right: double 7px #008000;
 }
 
+/* line 25, app/assets/stylesheets/comments.scss */
 #error_explanation {
   margin: 1rem 0;
   padding: .5rem;
@@ -29,21 +33,25 @@ h2 {
   background: whitesmoke;
   border-left: double 7px #ff4500;
   border-right: double 7px #ff4500;
-
-  h3 {
-    margin: 0;
-  }
-
-  ul {
-    margin: 0;
-  }
-
-  li {
-    color: #333;
-    font-size: 0.8rem;
-  }
 }
 
+/* line 33, app/assets/stylesheets/comments.scss */
+#error_explanation h3 {
+  margin: 0;
+}
+
+/* line 37, app/assets/stylesheets/comments.scss */
+#error_explanation ul {
+  margin: 0;
+}
+
+/* line 41, app/assets/stylesheets/comments.scss */
+#error_explanation li {
+  color: #333;
+  font-size: 0.8rem;
+}
+
+/* line 47, app/assets/stylesheets/comments.scss */
 .comment {
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -51,40 +59,45 @@ h2 {
   margin-bottom: 1rem;
 }
 
-@mixin comment_head_span {
+/* line 59, app/assets/stylesheets/comments.scss */
+.comment_head_number {
   display: inline-block;
   padding-right: 1rem;
 }
 
-.comment_head_number {
-  @include comment_head_span;
-}
-
+/* line 63, app/assets/stylesheets/comments.scss */
 .comment_head_name {
-  @include comment_head_span;
+  display: inline-block;
+  padding-right: 1rem;
   color: #008000;
 }
 
+/* line 68, app/assets/stylesheets/comments.scss */
 .comment_head_name_admin {
-  @include comment_head_span;
+  display: inline-block;
+  padding-right: 1rem;
   color: #ff4500;
 }
 
+/* line 73, app/assets/stylesheets/comments.scss */
 .comment_head_date {
   display: inline-block;
   font-size: 0.8rem;
 }
 
+/* line 78, app/assets/stylesheets/comments.scss */
 .comment_body {
   padding: 0 0.5rem;
   word-break: break-all;
 }
 
+/* line 83, app/assets/stylesheets/comments.scss */
 .input_wrapper .label {
   padding-bottom: .7rem;
 }
 
-@mixin content_in_input_wrapper {
+/* line 97, app/assets/stylesheets/comments.scss */
+.input_wrapper .cotent input {
   padding: 10px;
   line-height: 1.5em;
   width: 100%;
@@ -94,14 +107,18 @@ h2 {
   margin-bottom: 1.3rem;
 }
 
-.input_wrapper .cotent input {
-  @include content_in_input_wrapper;
-}
-
+/* line 101, app/assets/stylesheets/comments.scss */
 .input_wrapper .cotent textarea {
-  @include content_in_input_wrapper;
+  padding: 10px;
+  line-height: 1.5em;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  margin-bottom: 1.3rem;
 }
 
+/* line 105, app/assets/stylesheets/comments.scss */
 .input_wrapper .actions input {
   background-color: #c2d6ba;
   border-color: #c2d6ba;
