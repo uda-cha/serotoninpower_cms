@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.6.4-stretch-node
+      - image: circleci/ruby:2.6.5-stretch-node
         environment:
           RAILS_ENV: test
           DB_HOST: 127.0.0.1
@@ -12,8 +12,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: install bundler:2.0.2
-          command: gem install bundler:2.0.2
+          name: install bundler:2.1.4
+          command: gem install bundler:2.1.4
       - run:
           name: Which bundler?
           command: bundle -v
@@ -21,8 +21,8 @@ jobs:
           paths:
             - vendor/bundle
           keys:
-            - gems-202003070121-{{ checksum "Gemfile.lock" }}
-            - gems-202003070121-
+            - gems-202003070127-{{ checksum "Gemfile.lock" }}
+            - gems-202003070127-
       - run:
           name: bundle install
           command: bundle install --deployment --path vendor/bundle
