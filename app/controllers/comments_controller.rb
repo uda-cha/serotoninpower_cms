@@ -88,6 +88,8 @@ class CommentsController < ApplicationController
     end
 
     def allow_iframe
-      response.headers['X-Frame-Options'] = Rails.configuration.x.mod_response_header.x_frame_options
+      if ENV['allow_iframe_from'] && request.referer.include?(ENV['allow_iframe_from'])
+        response.headers.delete('X-Frame-Options')
+      end
     end
 end

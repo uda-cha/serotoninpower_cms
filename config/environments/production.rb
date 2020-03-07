@@ -68,6 +68,4 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-
-  config.x.mod_response_header.x_frame_options = "ALLOW-FROM #{ENV['allow_iframe_from']}"
 end
