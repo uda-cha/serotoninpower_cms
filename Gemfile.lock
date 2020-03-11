@@ -239,7 +239,7 @@ GEM
     tilt (2.0.10)
     tzinfo (1.2.6)
       thread_safe (~> 0.1)
-    user_agent_parser (2.5.3)
+    user_agent_parser (2.6.0)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (3.7.0)
