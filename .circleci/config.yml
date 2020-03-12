@@ -19,7 +19,7 @@ jobs:
           command: bundle -v
       - restore_cache:
           paths:
-            - vendor/bundle
+            - .bundle
           keys:
             - gems-202003070127-{{ checksum "Gemfile.lock" }}
             - gems-202003070127-
@@ -27,11 +27,11 @@ jobs:
           name: bundle install
           command: |
             bundle config set deployment 'true'
-            bundle config set path 'vendor/bundle'
+            bundle config set path '.bundle'
             bundle install
       - save_cache:
           paths:
-            - vendor/bundle
+            - .bundle
           key: gems-202003070121-{{ checksum "Gemfile.lock" }}
       - run:
           name: DB を待機
