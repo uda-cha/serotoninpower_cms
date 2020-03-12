@@ -28,7 +28,7 @@ jobs:
           command: |
             bundle config set deployment 'true'
             bundle config set path '.bundle'
-            bundle install
+            bundle install --jobs=4
       - save_cache:
           paths:
             - .bundle
