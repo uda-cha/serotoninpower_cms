@@ -25,7 +25,10 @@ jobs:
             - gems-202003070127-
       - run:
           name: bundle install
-          command: bundle install --deployment --path vendor/bundle
+          command: |
+            bundle config set deployment 'true'
+            bundle config set path 'vendor/bundle'
+            bundle install
       - save_cache:
           paths:
             - vendor/bundle
