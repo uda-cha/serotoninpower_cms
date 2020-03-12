@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   #before_action :set_comment, only: [:show, :edit, :update, :destroy]
   after_action :allow_iframe
+  protect_from_forgery with: :null_session
 
   # GET /comments
   # GET /comments.json
@@ -88,9 +89,13 @@ class CommentsController < ApplicationController
     end
 
     def allow_iframe
-      if (ENV['allow_iframe_from'] && request.referer&.include?(ENV['allow_iframe_from'])) \
-        || (request.domain && request.referer&.include?(request.domain))
+      if allowed_cross_domain_access?
         response.headers.delete('X-Frame-Options')
       end
+    end
+
+    def allowed_cross_domain_access?
+      (ENV['allow_iframe_from'] && request.referer&.include?(ENV['allow_iframe_from'])) \
+        || (request.domain && request.referer&.include?(request.domain))
     end
 end
