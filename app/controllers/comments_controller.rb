@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   #before_action :set_comment, only: [:show, :edit, :update, :destroy]
   after_action :allow_iframe
+  protect_from_forgery with: :null_session
 
   # GET /comments
   # GET /comments.json
