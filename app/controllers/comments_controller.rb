@@ -88,9 +88,13 @@ class CommentsController < ApplicationController
     end
 
     def allow_iframe
-      if (ENV['allow_iframe_from'] && request.referer&.include?(ENV['allow_iframe_from'])) \
-        || (request.domain && request.referer&.include?(request.domain))
+      if allowed_cross_domain_access?
         response.headers.delete('X-Frame-Options')
       end
+    end
+
+    def allowed_cross_domain_access?
+      (ENV['allow_iframe_from'] && request.referer&.include?(ENV['allow_iframe_from'])) \
+        || (request.domain && request.referer&.include?(request.domain))
     end
 end
