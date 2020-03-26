@@ -15,33 +15,34 @@ jobs:
     steps:
       - checkout
       - run:
-          name: install bundler:2.1.4
-          command: gem install bundler:2.1.4
-      - run:
           name: Which bundler?
           command: bundle -v
       - restore_cache:
           paths:
             - .bundle
           keys:
-            - gems-202003122230-{{ checksum "Gemfile.lock" }}
-            - gems-202003122230-
+            - gems-202003262318-{{ checksum "Gemfile.lock" }}
+            - gems-202003262318-
       - run:
           name: bundle install
           command: |
-            bundle config set deployment 'true'
+            bundle config set deployment true
             bundle config set path '.bundle'
             bundle install --jobs=4
       - save_cache:
           paths:
             - .bundle
-          key: gems-202003122230-{{ checksum "Gemfile.lock" }}
+          key: gems-202003262318-{{ checksum "Gemfile.lock" }}
       - run:
           name: DB を待機
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
       - run:
           name: データベースをセットアップ
           command: bundle exec rails db:create db:schema:load --trace
+      - run:
+          name: ruby syntax check
+          command: |
+            bundle exec rails runner 'puts "Syntax OK. Ruby: " + RUBY_VERSION + ", Rails: " + Rails::VERSION::STRING'
       - run:
           name: RSpec を並列実行
           command: |

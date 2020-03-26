@@ -12,8 +12,6 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-RUN gem install bundler
-
 WORKDIR /tmp
 ADD Gemfile Gemfile
 ADD Gemfile.lock Gemfile.lock
