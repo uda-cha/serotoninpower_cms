@@ -5,6 +5,8 @@ executors:
       - image: circleci/ruby:2.6.6-stretch-node
         environment:
           RAILS_ENV: test
+          BUNDLE_PATH: vendor/bundle
+          BUNDLE_JOBS: 4
           DB_HOST: 127.0.0.1
       - image: circleci/mysql:5.7
         environment:
@@ -16,20 +18,19 @@ jobs:
       - checkout
       - restore_cache:
           paths:
-            - .bundle/
+            - vendor/bundle
           keys:
-            - gems-202006211942-{{ checksum "Gemfile.lock" }}
-            - gems-202006211942-
+            - gems-202006211954-{{ checksum "Gemfile.lock" }}
+            - gems-202006211954-
+            - gems-
       - run:
           name: bundle install
           command: |
-            bundle config set path '.bundle/'
-            bundle config
-            bundle install --jobs=4
+            bundle install
       - save_cache:
           paths:
-            - .bundle/
-          key: gems-202006211942-{{ checksum "Gemfile.lock" }}
+            - vendor/bundle
+          key: gems-202006211954-{{ checksum "Gemfile.lock" }}
       - run:
           name: DB を待機
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
