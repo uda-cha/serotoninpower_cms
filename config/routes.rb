@@ -9,4 +9,10 @@ Rails.application.routes.draw do
       get :wrapper
     end
   end
+
+  namespace :v1, format: :json do
+    scope '/posts/:post_id' do
+      resources :comments, only: [:index, :create]
+    end
+  end
 end
