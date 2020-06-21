@@ -2,7 +2,7 @@ version: 2.1
 executors:
   default:
     docker:
-      - image: circleci/ruby:2.6.5-stretch-node
+      - image: circleci/ruby:2.6.6-stretch-node
         environment:
           RAILS_ENV: test
           DB_HOST: 127.0.0.1
