@@ -14,25 +14,22 @@ jobs:
     executor: default
     steps:
       - checkout
-      - run:
-          name: Which bundler?
-          command: bundle -v
       - restore_cache:
           paths:
-            - .bundle
+            - .bundle/
           keys:
-            - gems-202003262318-{{ checksum "Gemfile.lock" }}
-            - gems-202003262318-
+            - gems-202006211942-{{ checksum "Gemfile.lock" }}
+            - gems-202006211942-
       - run:
           name: bundle install
           command: |
-            bundle config set deployment true
-            bundle config set path '.bundle'
+            bundle config set path '.bundle/'
+            bundle config
             bundle install --jobs=4
       - save_cache:
           paths:
-            - .bundle
-          key: gems-202003262318-{{ checksum "Gemfile.lock" }}
+            - .bundle/
+          key: gems-202006211942-{{ checksum "Gemfile.lock" }}
       - run:
           name: DB を待機
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
