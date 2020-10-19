@@ -15,7 +15,7 @@ ActiveAdmin.register Comment do
   #   permitted
   # end
 
-  actions :all, except: [:destroy]
+  actions :all
 
   form do |f|
     f.semantic_errors
