@@ -40,7 +40,7 @@ jobs:
       - run:
           name: ruby syntax check
           command: |
-            bundle exec rails runner 'puts "Syntax OK. Ruby: " + RUBY_VERSION + ", Rails: " + Rails::VERSION::STRING'
+            bundle exec rails runner 'Rails.application.eager_load!; puts "Syntax OK. Ruby: " + RUBY_VERSION + ", Rails: " + Rails::VERSION::STRING'
       - run:
           name: RSpec を並列実行
           command: |
