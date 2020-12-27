@@ -4,13 +4,11 @@
 
 Rails 製の CMSです。コメントの CURD 操作を提供します。
 
-静的ファイルジェネレータなどで生成された html ファイルに iframe でコメント機能を埋め込むことを想定して作られています。
-
 コメントを管理するための管理画面があります。
 
 ## エンドポイント
 
-* コメント機能へのURL: `/posts/:post_id/comments/wrapper`
+* コメント機能へのURL: `/v1/posts/:post_id/comments`
 * 管理画面へのURL: `/cms_admin/login`
 
 ## Requirements
@@ -58,17 +56,6 @@ $ docker-compose build
 ```sh
 $ docker-compose run --rm rails bundle exec rspec
 ```
-
-## デプロイに必要な設定
-
-iframe での表示を許可するオリジンを設定するため、環境変数`allow_iframe_from`を設定した上でデプロイします。
-
-* 例
-
-```sh
-$ export allow_iframe_from='https://hoge.sample.com/'
-```
-
 ## デプロイ前にやること
 
 ```sh
