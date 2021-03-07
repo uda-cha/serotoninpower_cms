@@ -2,7 +2,7 @@ version: 2.1
 executors:
   default:
     docker:
-      - image: circleci/ruby:2.6.6-stretch-node
+      - image: circleci/ruby:2.6.6-buster-node
         environment:
           RAILS_ENV: test
           BUNDLE_PATH: vendor/bundle
