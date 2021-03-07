@@ -11,6 +11,10 @@ executors:
       - image: circleci/mysql:5.7
         environment:
           MYSQL_ROOT_PASSWORD: XXXXXXXX
+  gcloud:
+    docker:
+      - image: google/cloud-sdk:312.0.0-alpine
+
 jobs:
   build:
     executor: default
@@ -70,10 +74,35 @@ jobs:
           name: heroku maintenance off
           command: heroku maintenance:off --app ${HEROKU_APP_NAME}
 
+  push:
+    executor: gcloud
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run:
+          name: docker build
+          command: |
+            docker build . \
+              -t ${GOOGLE_GCR_URL}/${GOOGLE_PROJECT_ID}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}
+      - run:
+          name: gcloud config
+          command: |
+            echo ${GCLOUD_SERVICE_KEY} | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}-a
+            gcloud auth configure-docker --quiet --project ${GOOGLE_PROJECT_ID}
+      - run:
+          name: docker push
+          command: |
+            docker push ${GOOGLE_GCR_URL}/${GOOGLE_PROJECT_ID}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}
+
 workflows:
   build-deploy:
     jobs:
       - build
+      - push:
+          requires:
+            - build
       - deploy:
           requires:
             - build
