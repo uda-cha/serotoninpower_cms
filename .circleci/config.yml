@@ -14,6 +14,9 @@ executors:
   gcloud:
     docker:
       - image: google/cloud-sdk:312.0.0-alpine
+  cimg:
+    docker:
+      - image: cimg/base:2021.03
 
 jobs:
   build:
@@ -58,7 +61,7 @@ jobs:
           path: test_results
 
   deploy:
-    executor: default
+    executor: cimg
     resource_class: small
     steps:
       - checkout
