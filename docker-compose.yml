@@ -5,6 +5,8 @@ services:
     ports:
       - "3000:3000"
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    environment:
+      DATABASE_URL: mysql2://root@db/myapp_development?reconnect=true&encoding=utf8mb4&charset=utf8mb4&collation=utf8mb4_general_ci&pool=5
     volumes:
       - .:/myapp
     depends_on:
@@ -12,7 +14,7 @@ services:
   db:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: XXXXXXXX
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
     ports:
       - '3306:3306'
     volumes:
