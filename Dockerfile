@@ -32,3 +32,5 @@ RUN bundle install \
 USER performer
 WORKDIR ${APP_HOME}
 COPY --chown=performer . ${APP_HOME}
+
+CMD ["bundle", "exec", "rails", "s", "-b", "0.0.0.0"]
