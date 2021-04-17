@@ -17,6 +17,7 @@ gem 'activeadmin', '>= 2.6.0'
 gem 'devise', '>= 4.7.0'
 gem 'rack-attack', '>= 6.2.2'
 gem 'rack-cors'
+gem 'revision_plate', require: 'revision_plate/rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
