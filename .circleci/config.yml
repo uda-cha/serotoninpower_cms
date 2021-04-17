@@ -18,8 +18,19 @@ executors:
     docker:
       - image: cimg/base:2021.03
 
+commands:
+  gcloud_config:
+    steps:
+      - run:
+          name: gcloud config
+          command: |
+            echo ${GCLOUD_SERVICE_KEY} | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}-a
+            gcloud auth configure-docker --quiet --project ${GOOGLE_GCR_PROJECT_ID}
+
 jobs:
-  build:
+  test:
     executor: default
     resource_class: small
     steps:
@@ -88,29 +99,40 @@ jobs:
           name: docker build
           command: |
             docker build . \
-              -t ${GOOGLE_GCR_URL}/${GOOGLE_PROJECT_ID}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}
-      - run:
-          name: gcloud config
-          command: |
-            echo ${GCLOUD_SERVICE_KEY} | gcloud auth activate-service-account --key-file=-
-            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}-a
-            gcloud auth configure-docker --quiet --project ${GOOGLE_PROJECT_ID}
+              -t ${GOOGLE_GCR_URL}/${GOOGLE_GCR_PROJECT_ID}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}
+      - gcloud_config
       - run:
           name: docker push
           command: |
-            docker push ${GOOGLE_GCR_URL}/${GOOGLE_PROJECT_ID}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}
+            docker push ${GOOGLE_GCR_URL}/${GOOGLE_GCR_PROJECT_ID}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}
+
+  deploy_to_gcr:
+    executor: gcloud
+    resource_class: small
+    steps:
+      - gcloud_config
+      - run:
+          name: gcloud run deploy
+          command: |
+            gcloud run deploy ${GOOGLE_CLOUD_RUN_SERVICE} --platform managed --region ${GOOGLE_COMPUTE_ZONE} --image ${GOOGLE_GCR_URL}/${GOOGLE_GCR_PROJECT_ID}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}
 
 workflows:
   build-deploy:
     jobs:
-      - build
+      - test
       - push:
           requires:
-            - build
+            - test
+      - deploy_to_gcr:
+          requires:
+            - push
+          filters:
+            branches:
+              only:
+                - master
       - deploy:
           requires:
-            - build
+            - test
           filters:
             branches:
               only:
