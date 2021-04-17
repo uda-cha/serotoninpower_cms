@@ -96,6 +96,9 @@ jobs:
       - setup_remote_docker
       - checkout
       - run:
+          name: make REVISION file
+          command: echo ${CIRCLE_SHA1} > REVISION
+      - run:
           name: docker build
           command: |
             docker build . \

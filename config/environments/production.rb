@@ -37,7 +37,7 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [ :request_id, :remote_ip ]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -55,6 +55,7 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+  config.colorize_logging = false
 
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
